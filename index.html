@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תבנית מייל אוטומטית</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select, textarea, button {
+            width: calc(100% - 30px);
+            padding: 10px;
+            margin: 5px 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-family: Helvetica, sans-serif;
+            display: block;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2, h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>יצירת מייל בפורמט זיו</h2>
+        
+        <label>פתיחת המייל:</label>
+        <textarea id="emailOpening">היי,</textarea>
+        
+        <label>שם הנמען:</label>
+        <input type="text" id="recipientName">
+        
+        <label>שם הלקוח:</label>
+        <input type="text" id="clientName">
+        
+        <label>סוג עסקה:</label>
+        <select id="dealType">
+            <option value="חידוש">חידוש</option>
+            <option value="הרחבת פעילות">הרחבת פעילות</option>
+        </select>
+        
+        <label>סכום העסקה:</label>
+        <input type="number" id="dealAmount">
+        
+        <label>תקופת ההשכרה:</label>
+        <input type="text" id="rentalPeriod" placeholder="לדוגמה: 1/2/25 - 31/1/26">
+        
+        <label>מועד החידוש:</label>
+        <input type="text" id="renewalDate" placeholder="לדוגמה: ינואר 26">
+        
+        <label>פעולות לביצוע:</label>
+        <textarea id="actions"></textarea>
+        
+        <label>תפעול:</label>
+        <textarea id="operations"></textarea>
+        
+        <label>מכירות:</label>
+        <textarea id="sales"></textarea>
+        
+        <label>ניהול מוצר LMS:</label>
+        <textarea id="productManagement"></textarea>
+        
+        <label>פעילות upsale:</label>
+        <textarea id="upsale"></textarea>
+        
+        <button onclick="generateEmail()">צור מייל</button>
+        <button onclick="copyToClipboard()">העתק ללוח</button>
+        
+        <h3>תצוגה מקדימה של המייל (ניתנת לעריכה):</h3>
+        <textarea id="emailPreview"></textarea>
+    </div>
+    
+    <script>
+        function generateEmail() {
+            const emailOpening = document.getElementById('emailOpening').value;
+            const recipientName = document.getElementById('recipientName').value || "[שם הנמען]";
+            const clientName = document.getElementById('clientName').value || "[שם הלקוח]";
+            const dealType = document.getElementById('dealType').value;
+            const dealAmount = document.getElementById('dealAmount').value || "[סכום העסקה]";
+            const rentalPeriod = document.getElementById('rentalPeriod').value || "[תקופת ההשכרה]";
+            const renewalDate = document.getElementById('renewalDate').value || "[מועד החידוש]";
+            const actions = document.getElementById('actions').value || "אין פעולות לביצוע";
+            const operations = document.getElementById('operations').value || "אין פעולות תפעול";
+            const sales = document.getElementById('sales').value || "אין פעולות מכירה";
+            const productManagement = document.getElementById('productManagement').value || "אין פעולות ניהול מוצר";
+            const upsale = document.getElementById('upsale').value || "אין פעולות upsale";
+            
+            const dealTypeText = dealType === 'חידוש' ? 'החידוש' : 'הרחבת הפעילות';
+            
+            const emailText = `
+${emailOpening}
+${recipientName} - ברכות על ${dealTypeText} עם ${clientName}!
+
+1. סוג עסקה – ${dealTypeText}
+2. סכום העסקה – ${dealAmount} ₪
+3. תקופת ההשכרה – ${rentalPeriod}
+4. מועד החידוש – ${renewalDate}
+5. פעולות לביצוע:
+${actions}
+
+תפעול:
+${operations}
+
+מכירות:
+${sales}
+
+ניהול מוצר LMS:
+${productManagement}
+
+פעילות upsale:
+${upsale}`;
+            
+            document.getElementById('emailPreview').value = emailText;
+        }
+        
+        function copyToClipboard() {
+            const emailText = document.getElementById('emailPreview').value;
+            navigator.clipboard.writeText(emailText).then(() => {
+                alert("המייל הועתק ללוח ההעתקה!");
+            }).catch(err => {
+                console.error("שגיאה בהעתקת הטקסט: ", err);
+                alert("שגיאה בהעתקת הטקסט");
+            });
+        }
+    </script>
+</body>
+</html>
