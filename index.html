@@ -29,7 +29,7 @@
         input, select, textarea, button {
             width: calc(100% - 30px);
             padding: 10px;
-            margin: 5px 15px;
+            margin: 5px auto;
             border-radius: 6px;
             border: 1px solid #ccc;
             font-family: Helvetica, sans-serif;
@@ -72,6 +72,7 @@
         <select id="dealType">
             <option value="חידוש">חידוש</option>
             <option value="הרחבת פעילות">הרחבת פעילות</option>
+            <option value="גיוס לקוח חדש">גיוס לקוח חדש</option>
         </select>
         
         <label>סכום העסקה:</label>
@@ -120,7 +121,7 @@
             const productManagement = document.getElementById('productManagement').value || "אין פעולות ניהול מוצר";
             const upsale = document.getElementById('upsale').value || "אין פעולות upsale";
             
-            const dealTypeText = dealType === 'חידוש' ? 'החידוש' : 'הרחבת הפעילות';
+            const dealTypeText = dealType === 'חידוש' ? 'החידוש' : dealType === 'הרחבת פעילות' ? 'הרחבת הפעילות' : 'גיוס לקוח חדש';
             
             const emailText = `
 ${emailOpening}
