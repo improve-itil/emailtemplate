@@ -53,12 +53,28 @@
         h2, h3 {
             text-align: center;
         }
+        .instructions {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d7ff;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>יצירת מייל בפורמט זיו</h2>
-        
+
+        <div class="instructions">
+            <strong>איך משתמשים:</strong><br>
+            מלא את השדות לפי פרטי העסקה הרצויים ולחץ על "צור מייל".<br>
+            לאחר מכן תוכל לערוך את הטקסט בתצוגה המקדימה.<br>
+            לסיום, לחץ על "העתק ללוח" והדבק את הטקסט במייל שלך.
+        </div>
+
         <label>פתיחת המייל:</label>
         <textarea id="emailOpening">היי,</textarea>
         
@@ -121,7 +137,7 @@
             const productManagement = document.getElementById('productManagement').value || "אין פעולות ניהול מוצר";
             const upsale = document.getElementById('upsale').value || "אין פעולות upsale";
             
-            const dealTypeText = dealType === 'חידוש' ? 'חידוש' : dealType === 'הרחבת פעילות' ? 'הרחבת הפעילות' : 'גיוס לקוח חדש';
+            const dealTypeText = dealType;
             
             const emailText = `
 ${emailOpening}
